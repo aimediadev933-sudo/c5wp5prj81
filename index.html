@@ -1,1 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIKAP+ - Space Infrastructure, Know-How and Applications Acceleration</title>
+    <style>
+        :root {
+            --primary: #EF5350;
+            --secondary: #FF7043;
+            --body: #F8F3F0;
+            --text: #1D1D1B;
+            --secondary-dark: #9C3A26;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--body);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary-dark));
+            color: white;
+            padding: 4.5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -70%;
+            right: -40%;
+            width: 1100px;
+            height: 1100px;
+            background: radial-gradient(circle, rgba(255, 112, 67, 0.35) 0%, transparent 70%);
+            animation: spacePulse 25s ease-in-out infinite;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -80%;
+            left: -35%;
+            width: 1000px;
+            height: 1000px;
+            background: conic-gradient(from 180deg, rgba(255, 255, 255, 0.18), transparent, rgba(255, 255, 255, 0.12));
+            animation: rotate 55s linear infinite;
+        }
+
+        @keyframes spacePulse {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.35; }
+            50% { transform: scale(1.8) rotate(180deg); opacity: 0.45; }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 65px;
+            margin-bottom: 5.5rem;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            height: 100px;
+            width: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 28px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+            transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 112, 67, 0.35), transparent);
+            border-radius: 28px;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+
+        .logo:hover {
+            transform: translateY(-25px) scale(1.25) rotateY(18deg);
+            box-shadow: 0 50px 100px rgba(0, 0, 0, 0.55);
+        }
+
+        .logo:hover::before {
+            opacity: 1;
+        }
+
+        .hero-text {
+            text-align: center;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(4.5rem, 12vw, 8rem);
+            margin-bottom: 3.5rem;
+            font-weight: 900;
+            letter-spacing: -8px;
+            background: linear-gradient(45deg, #fff, #FF7043, #fff, #EF5350, #fff, #FF7043);
+            background-size: 700% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textSpace 15s ease-in-out infinite;
+        }
+
+        @keyframes textSpace {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero-text .subtitle {
+            font-size: clamp(1.8rem, 6vw, 3rem);
+            opacity: 0.95;
+            margin-bottom: 4.5rem;
+            font-weight: 300;
+        }
+
+        .hero-text .space-info {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 3rem 6rem;
+            border-radius: 80px;
+            font-weight: 900;
+            font-size: 1.6rem;
+            display: inline-block;
+            backdrop-filter: blur(40px);
+            border: 6px solid rgba(255, 255, 255, 0.4);
+            transition: all 0.8s ease;
+            margin-bottom: 4.5rem;
+        }
+
+        .hero-text .space-info:hover {
+            background: rgba(255, 255, 255, 0.45);
+            transform: translateY(-15px) scale(1.12);
+            border-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .hero-text .space-technologies {
+            display: flex;
+            justify-content: center;
+            gap: 4.5rem;
+            flex-wrap: wrap;
+            margin-top: 6rem;
+        }
+
+        .space-tech {
+            background: rgba(255, 255, 255, 0.25);
+            padding: 3rem 6rem;
+            border-radius: 70px;
+            font-weight: 900;
+            backdrop-filter: blur(35px);
+            border: 6px solid rgba(255, 255, 255, 0.4);
+            transition: all 0.9s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .space-tech::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+            transition: left 1.6s ease;
+        }
+
+        .space-tech:hover {
+            background: rgba(255, 255, 255, 0.45);
+            transform: translateY(-18px) scale(1.18);
+            border-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .space-tech:hover::before {
+            left: 100%;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--secondary-dark);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 15px 50px rgba(156, 58, 38, 0.9);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-item {
+            color: white;
+            text-decoration: none;
+            padding: 3.5rem 6rem;
+            transition: all 0.9s ease;
+            font-weight: 900;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 12px;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            transition: all 0.9s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 112, 67, 0.45), rgba(239, 83, 80, 0.45));
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+
+        .nav-item:hover {
+            color: var(--secondary);
+            transform: translateY(-8px);
+        }
+
+        .nav-item:hover::before {
+            width: 100%;
+        }
+
+        .nav-item:hover::after {
+            opacity: 1;
+        }
+
+        /* Main Content */
+        main {
+            padding: 12rem 0;
+        }
+
+        .section {
+            margin-bottom: 18rem;
+            background: white;
+            border-radius: 55px;
+            padding: 9rem;
+            box-shadow: 0 45px 160px rgba(239, 83, 80, 0.35);
+            position: relative;
+            overflow: hidden;
+            transform: translateY(90px);
+            opacity: 0;
+            animation: slideInUp 3.5s ease forwards;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 20px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary));
+            background-size: 800% 100%;
+            animation: spaceWave 9s ease-in-out infinite;
+        }
+
+        @keyframes spaceWave {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes slideInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section:nth-child(even) {
+            animation-delay: 1.2s;
+        }
+
+        .section:nth-child(odd) {
+            animation-delay: 0.6s;
+        }
+
+        .section h2 {
+            font-size: 5.5rem;
+            color: var(--primary);
+            margin-bottom: 8rem;
+            position: relative;
+            font-weight: 900;
+        }
+
+        .section h3 {
+            font-size: 4rem;
+            color: var(--secondary-dark);
+            margin: 8rem 0 6rem 0;
+            font-weight: 900;
+        }
+
+        /* Space Technology Showcase */
+        .space-showcase {
+            background: linear-gradient(135deg, rgba(239, 83, 80, 0.25), rgba(255, 112, 67, 0.25));
+            padding: 9rem;
+            border-radius: 50px;
+            margin: 9rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .space-showcase::before {
+            content: '';
+            position: absolute;
+            top: -150%;
+            left: -150%;
+            width: 400%;
+            height: 400%;
+            background: radial-gradient(circle, rgba(255, 112, 67, 0.18) 0%, transparent 70%);
+            animation: rotate 70s linear infinite;
+        }
+
+        .space-capabilities {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 7rem;
+            margin: 8rem 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .space-capability {
+            background: white;
+            padding: 7rem;
+            border-radius: 40px;
+            text-align: center;
+            transition: all 1s ease;
+            border: 8px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .space-capability::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 112, 67, 0.4), transparent);
+            transition: left 1.6s ease;
+        }
+
+        .space-capability:hover {
+            transform: translateY(-40px) scale(1.12);
+            border-color: var(--secondary);
+            box-shadow: 0 55px 110px rgba(239, 83, 80, 0.5);
+        }
+
+        .space-capability:hover::before {
+            left: 100%;
+        }
+
+        .space-icon {
+            font-size: 9rem;
+            margin-bottom: 4rem;
+            display: block;
+        }
+
+        .space-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 3.5rem;
+        }
+
+        .space-desc {
+            font-size: 1.6rem;
+            color: var(--text);
+            line-height: 2.2;
+        }
+
+        /* Regional Network */
+        .regional-space {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 6rem;
+            margin: 9rem 0;
+        }
+
+        .country-space {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 7rem;
+            border-radius: 45px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 1.1s ease;
+        }
+
+        .country-space::before {
+            content: '';
+            position: absolute;
+            top: -120%;
+            right: -120%;
+            width: 240%;
+            height: 240%;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 50%;
+            transition: all 1.1s ease;
+        }
+
+        .country-space:hover {
+            transform: translateY(-45px) scale(1.18);
+            box-shadow: 0 70px 140px rgba(239, 83, 80, 0.9);
+        }
+
+        .country-space:hover::before {
+            transform: scale(2.8) rotate(45deg);
+        }
+
+        .country-flag {
+            font-size: 7rem;
+            margin-bottom: 4rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .country-name {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 2.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .country-role {
+            position: relative;
+            z-index: 2;
+            font-size: 1.4rem;
+            opacity: 0.95;
+            line-height: 2;
+        }
+
+        /* Activities & Training */
+        .activities-space {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(700px, 1fr));
+            gap: 8rem;
+            margin: 10rem 0;
+        }
+
+        .activity-category {
+            background: var(--body);
+            padding: 8rem;
+            border-radius: 45px;
+            border-left: 20px solid var(--primary);
+            transition: all 0.9s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .activity-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(239, 83, 80, 0.2), rgba(255, 112, 67, 0.2));
+            transition: width 1.1s ease;
+        }
+
+        .activity-category:hover {
+            transform: translateX(40px);
+            box-shadow: 0 45px 90px rgba(239, 83, 80, 0.4);
+            border-left-color: var(--secondary);
+        }
+
+        .activity-category:hover::before {
+            width: 100%;
+        }
+
+        .activity-category h4 {
+            color: var(--primary);
+            margin-bottom: 4rem;
+            font-size: 3rem;
+            font-weight: 900;
+            position: relative;
+            z-index: 2;
+        }
+
+        .activity-category p {
+            position: relative;
+            z-index: 2;
+            line-height: 2;
+            font-size: 1.5rem;
+        }
+
+        .activity-list {
+            position: relative;
+            z-index: 2;
+            margin-top: 3rem;
+        }
+
+        .activity-item {
+            margin: 3rem 0;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 25px;
+            transition: all 0.6s ease;
+        }
+
+        .activity-item:hover {
+            transform: translateX(20px);
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 20px 40px rgba(239, 83, 80, 0.25);
+        }
+
+        .activity-name {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .activity-details {
+            font-size: 1.4rem;
+            color: var(--text);
+            line-height: 1.9;
+        }
+
+        /* Impact Statistics */
+        .impact-space {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 6rem;
+            margin: 9rem 0;
+        }
+
+        .impact-stat {
+            background: linear-gradient(135deg, var(--secondary-dark), var(--primary));
+            color: white;
+            padding: 7rem;
+            border-radius: 45px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 1.1s ease;
+        }
+
+        .impact-stat::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transform: translateX(-100%);
+            transition: transform 1.8s ease;
+        }
+
+        .impact-stat:hover::before {
+            transform: translateX(100%);
+        }
+
+        .impact-stat:hover {
+            transform: scale(1.25);
+        }
+
+        .impact-number {
+            font-size: 7rem;
+            font-weight: 900;
+            display: block;
+            margin-bottom: 3rem;
+        }
+
+        .impact-label {
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+
+        /* SDG Section */
+        .sdg-space {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 6rem;
+            margin: 9rem 0;
+        }
+
+        .sdg-card {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 7rem;
+            border-radius: 45px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 1s ease;
+        }
+
+        .sdg-card::before {
+            content: '';
+            position: absolute;
+            top: -400%;
+            left: 0;
+            width: 100%;
+            height: 400%;
+            background: rgba(255, 255, 255, 0.4);
+            transition: top 1s ease;
+        }
+
+        .sdg-card:hover {
+            transform: translateY(-35px) scale(1.15);
+        }
+
+        .sdg-card:hover::before {
+            top: 0;
+        }
+
+        .sdg-number {
+            font-size: 6rem;
+            font-weight: 900;
+            display: block;
+            margin-bottom: 4rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .sdg-title {
+            position: relative;
+            z-index: 2;
+            font-weight: 900;
+            font-size: 2.2rem;
+        }
+
+        /* Future Vision */
+        .future-space {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 15rem;
+            border-radius: 60px;
+            text-align: center;
+            margin: 15rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .future-space::before {
+            content: '';
+            position: absolute;
+            top: -200%;
+            left: -200%;
+            width: 500%;
+            height: 500%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.35) 0%, transparent 70%);
+            animation: rotate 90s linear infinite;
+        }
+
+        .future-space h3 {
+            color: white;
+            font-size: 6rem;
+            margin-bottom: 7rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .future-space p {
+            font-size: 2.5rem;
+            line-height: 2.3;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-dark);
+            color: white;
+            text-align: center;
+            padding: 15rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 85%, rgba(255, 112, 67, 0.4) 100%);
+        }
+
+        .footer-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .logo-section {
+                gap: 50px;
+            }
+
+            .logo {
+                height: 90px;
+            }
+
+            .section {
+                padding: 7rem;
+            }
+
+            .hero-text .space-technologies {
+                gap: 4rem;
+            }
+
+            .space-tech {
+                padding: 2.5rem 5rem;
+                font-size: 0.9rem;
+            }
+
+            .nav-item {
+                padding: 3rem 5rem;
+                font-size: 0.9rem;
+            }
+
+            .activities-space {
+                grid-template-columns: 1fr;
+            }
+
+            .regional-space {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            }
+
+            .space-capabilities {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero-text h1 {
+                font-size: 4.5rem;
+            }
+
+            .hero-text .subtitle {
+                font-size: 1.8rem;
+            }
+
+            .section h2 {
+                font-size: 4.5rem;
+            }
+
+            .space-showcase {
+                padding: 7rem;
+            }
+
+            .future-space {
+                padding: 10rem;
+            }
+
+            .future-space h3 {
+                font-size: 4rem;
+            }
+
+            .future-space p {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <img src="images/logos/tein-logo.png" alt="TEIN CC" class="logo">
+                    <img src="images/logos/asia-connect-logo.png" alt="Asi@Connect" class="logo">
+                    <img src="images/logos/eu-logo.png" alt="European Union" class="logo">
+                </div>
+                <div class="hero-text">
+                    <h1>SIKAP+</h1>
+                    <p class="subtitle">Space Infrastructure, Know-How and Applications Acceleration through Promotion and Training</p>
+                    <div class="space-info">WP5 Project - 5th Call - Philippines Lead</div>
+                    <div class="space-technologies">
+                        <span class="space-tech">Satellite Communications</span>
+                        <span class="space-tech">Earth Observation</span>
+                        <span class="space-tech">Space Situational Awareness</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <div class="nav-container">
+                <a href="#overview" class="nav-item">Overview</a>
+                <a href="#space-tech" class="nav-item">Space Tech</a>
+                <a href="#network" class="nav-item">Network</a>
+                <a href="#training" class="nav-item">Training</a>
+                <a href="#impact" class="nav-item">Impact</a>
+                <a href="#future" class="nav-item">Future</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <section id="overview" class="section">
+                <h2>Advancing Regional Space Capabilities</h2>
+                <p>The SIKAP+ Project represents a transformative initiative to enhance regional capacity in space infrastructure, applications, and knowledge transfer through collaborative training and promotion across Asia. Leveraging the existing space assets and expertise of the Philippines and partner countries, this project provides a comprehensive platform for exchanging best practices in satellite communication, Earth observation (EO), and space situational awareness technologies.</p>
+
+                <div class="space-showcase">
+                    <h3 style="position: relative; z-index: 2; color: var(--primary); font-size: 4.5rem; margin-bottom: 6rem;">Space Technology Excellence</h3>
+                    <div class="space-capabilities">
+                        <div class="space-capability">
+                            <div class="space-icon">🛰️</div>
+                            <div class="space-title">Satellite Communications</div>
+                            <div class="space-desc">Advanced satellite communication systems enabling regional connectivity, data transmission, and collaborative space missions across participating countries.</div>
+                        </div>
+                        <div class="space-capability">
+                            <div class="space-icon">🌍</div>
+                            <div class="space-title">Earth Observation</div>
+                            <div class="space-desc">Comprehensive EO data sharing infrastructure providing access to satellite imagery, environmental monitoring, and climate observation capabilities.</div>
+                        </div>
+                        <div class="space-capability">
+                            <div class="space-icon">🔭</div>
+                            <div class="space-title">Space Situational Awareness</div>
+                            <div class="space-desc">Advanced monitoring systems for space debris tracking, satellite collision avoidance, and ensuring the sustainable use of outer space.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Project Mission & Objectives</h3>
+                <p>The initiative advances regional cooperation through shared use of Ground Receiving Stations (GRS), cutting-edge data processing technologies, and open-source monitoring tools. By engaging new and emerging space actors across Asia, SIKAP+ contributes significantly to the responsible and peaceful use of outer space technologies for societal benefit, environmental monitoring, and sustainable development across the region.</p>
+            </section>
+
+            <section id="space-tech" class="section">
+                <h2>Space Infrastructure & Technology</h2>
+                <p>SIKAP+ leverages state-of-the-art space infrastructure to create a collaborative ecosystem for space technology development and knowledge sharing. The project focuses on building regional capacity through shared access to advanced satellite systems, ground stations, and data processing capabilities.</p>
+
+                <div class="impact-space">
+                    <div class="impact-stat">
+                        <span class="impact-number">10+</span>
+                        <span class="impact-label">Partner Countries</span>
+                    </div>
+                    <div class="impact-stat">
+                        <span class="impact-number">300+</span>
+                        <span class="impact-label">Participants Trained</span>
+                    </div>
+                    <div class="impact-stat">
+                        <span class="impact-number">100%</span>
+                        <span class="impact-label">Platform Deployment</span>
+                    </div>
+                    <div class="impact-stat">
+                        <span class="impact-number">24/7</span>
+                        <span class="impact-label">Space Monitoring</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="network" class="section">
+                <h2>Regional Space Partnership Network</h2>
+                <p>The SIKAP+ project establishes a comprehensive regional network led by the Philippines and spanning multiple Asian countries. This partnership leverages diverse space capabilities and expertise to create a collaborative ecosystem for space technology advancement and peaceful space exploration.</p>
+
+                <div class="regional-space">
+                    <div class="country-space">
+                        <div class="country-flag">🇵🇭</div>
+                        <div class="country-name">Philippines</div>
+                        <div class="country-role">Lead coordinator through PhilSA, PREGINET, DOST-ASTI, and UP Diliman</div>
+                    </div>
+                    <div class="country-space">
+                        <div class="country-flag">🇯🇵</div>
+                        <div class="country-name">Japan</div>
+                        <div class="country-role">BIRDS Network, Kyushu Institute of Technology, Asian Microsatellite Consortium</div>
+                    </div>
+                    <div class="country-space">
+                        <div class="country-
